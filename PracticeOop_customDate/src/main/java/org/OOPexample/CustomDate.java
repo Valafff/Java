@@ -6,8 +6,6 @@ import java.time.temporal.ChronoUnit;
 
 public class CustomDate
 {
-
-
     private int day;
     private int  month;
     private  int year;
@@ -86,7 +84,6 @@ public class CustomDate
         this.month = Calendar.getInstance().get(Calendar.MONTH);
         this.year = Calendar.getInstance().get(Calendar.YEAR);
     }
-
 
     public boolean isValid ()
     {
