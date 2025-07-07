@@ -16,5 +16,18 @@ public class Main {
         System.out.println("Прибавление дня "+fullCustom.toString());
         System.out.println("Количество дней от 01.01.0000 "+fullCustom.toDays());
         System.out.println("Разница между датами "+fullCustom.dateOffset(nowDate));
+
+        System.out.println();
+        Elevator elevator = new Elevator();
+        elevator.setMaxFloor(25);
+        elevator.setCurrentFloor(13);
+        elevator.setMaxWeight(900);
+        System.out.println("Текущий этаж " + elevator.getCurrentFloor());
+        elevator.callElevator(1);
+        System.out.println("Текущий этаж " + elevator.getCurrentFloor());
+        elevator.sendElevator(10, 450);
+        System.out.println("Текущий этаж " + elevator.getCurrentFloor());
+        System.out.println(elevator.getElevatorType());
+        elevator.elevatorInfo();
     }
 }
