@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<!-- Подключаем пространство имен Thymeleaf для использования его атрибутов -->
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Калькулятор</title>
+</head>
+<body>
+    <h2>Калькулятор</h2>
+    <!-- Форма для отправки математического выражения на вычисление -->
+    <!-- action="/calculate" указывает, что данные формы будут отправлены на эндпоинт /calculate -->
+    <form action="/calculate" method="post">
+        <div>
+            <!-- Метка для поля ввода выражения -->
+            <label for="expression">Выражение:</label>
+            <!-- Поле для ввода математического выражения -->
+            <input type="text" id="expression" name="expression" required>
+        </div>
+        <!-- Кнопка для отправки формы -->
+        <button type="submit">Вычислить</button>
+    </form>
+
+    <h3>История вычислений</h3>
+    <!-- Таблица для отображения истории вычислений пользователя -->
+    <table border="1">
+        <thead>
+            <tr>
+                <th>Выражение</th>
+                <th>Результат</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!--
+                Цикл Thymeleaf `th:each` для перебора списка вычислений (`calculations`),
+                который был передан из контроллера.
+                Каждый элемент списка будет доступен в переменной `calc`.
+            -->
+            <tr th:each="calc : ${calculations}">
+                <!-- Отображаем выражение из объекта calc -->
+                <td th:text="${calc.expression}"></td>
+                <!-- Отображаем результат из объекта calc -->
+                <td th:text="${calc.result}"></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <!-- Ссылка для выхода из системы -->
+    <a href="/auth/logout">Выйти</a>
+</body>
+</html>

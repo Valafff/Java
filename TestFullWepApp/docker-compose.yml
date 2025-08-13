@@ -1,0 +1,15 @@
+version: '3.8'
+services:
+  app:
+    container_name: simple-calculator
+    image: test-java-spring-boot-app
+    build: .
+    ports:
+      - "8080:80"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+      - SPRING_DATASOURCE_URL=jdbc:postgresql://host.docker.internal:5433/testDB
+      - SPRING_DATASOURCE_USERNAME=vi
+      - SPRING_DATASOURCE_PASSWORD=12345
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

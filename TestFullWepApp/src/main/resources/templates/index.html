@@ -1,0 +1,139 @@
+<!--<!DOCTYPE html>-->
+<!--<html lang="ru">-->
+<!--<head>-->
+<!--    <meta charset="UTF-8">-->
+<!--    <title>Главная страница</title>-->
+<!--    <style>-->
+<!--        body { font-family: sans-serif; margin: 0; display: flex; flex-direction: column; min-height: 100vh; }-->
+<!--        header { background-color: #333; color: white; padding: 1rem; text-align: center; }-->
+<!--        header a { color: white; text-decoration: none; margin: 0 15px; }-->
+<!--        header a:hover { text-decoration: underline; }-->
+<!--        .container { display: flex; flex: 1; }-->
+<!--        nav { width: 200px; background-color: #f4f4f4; padding: 1rem; }-->
+<!--        main { flex: 1; padding: 1rem; }-->
+<!--        aside { width: 200px; background-color: #f4f4f4; padding: 1rem; }-->
+<!--        footer { background-color: #333; color: white; text-align: center; padding: 1rem; }-->
+<!--    </style>-->
+<!--</head>-->
+<!--<body>-->
+
+<!--    &lt;!&ndash; Шапка сайта &ndash;&gt;-->
+<!--    <header>-->
+<!--        <h1>Добро пожаловать!</h1>-->
+<!--        <nav>-->
+<!--            <a href="/">Главная</a>-->
+<!--            <a href="/calculate">Калькулятор</a>-->
+<!--            <a href="/auth/login">Вход</a>-->
+<!--            <a href="/auth/register">Регистрация</a>-->
+<!--        </nav>-->
+<!--    </header>-->
+
+<!--    &lt;!&ndash; Основной контейнер &ndash;&gt;-->
+<!--    <div class="container">-->
+<!--        &lt;!&ndash; Левая панель &ndash;&gt;-->
+<!--        <nav>-->
+<!--            <h3>Навигация</h3>-->
+<!--            <ul>-->
+<!--                <li><a href="/calculate">Калькулятор</a></li>-->
+<!--                <li><a href="/auth/login">Вход</a></li>-->
+<!--            </ul>-->
+<!--        </nav>-->
+
+<!--        &lt;!&ndash; Центральная часть &ndash;&gt;-->
+<!--        <main>-->
+<!--            <h2>О приложении</h2>-->
+<!--            <p>Это простое веб-приложение на Spring Boot, которое позволяет пользователям регистрироваться, входить в систему и выполнять математические вычисления.</p>-->
+<!--            <p>Используйте ссылки в шапке сайта для навигации по страницам.</p>-->
+<!--        </main>-->
+
+<!--        &lt;!&ndash; Правая панель &ndash;&gt;-->
+<!--        <aside>-->
+<!--            <h3>Доп. информация</h3>-->
+<!--            <p>Здесь может быть размещена дополнительная информация или реклама.</p>-->
+<!--        </aside>-->
+<!--    </div>-->
+
+<!--    &lt;!&ndash; Футер (подвал) сайта &ndash;&gt;-->
+<!--    <footer>-->
+<!--        <p>&copy; 2025 TestFullWepApp. Все права защищены.</p>-->
+<!--    </footer>-->
+
+<!--</body>-->
+<!--</html>-->
+
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Главная страница</title>
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+
+<!-- Шапка сайта -->
+<header>
+    <div class="header-container">
+        <a href="/" class="logo">MathApp</a>
+        <nav class="nav-links">
+            <a href="/"><i class="fas fa-home"></i> Главная</a>
+            <a href="/calculate"><i class="fas fa-calculator"></i> Калькулятор</a>
+            <a href="/auth/login"><i class="fas fa-sign-in-alt"></i> Вход</a>
+            <a href="/auth/register"><i class="fas fa-user-plus"></i> Регистрация</a>
+        </nav>
+    </div>
+</header>
+
+<!-- Основной контейнер -->
+<div class="main-container">
+    <!-- Боковая панель -->
+    <aside class="sidebar">
+        <h3>Быстрые ссылки</h3>
+        <ul>
+            <li><a href="/calculate"><i class="fas fa-calculator"></i> Калькулятор</a></li>
+            <li><a href="/auth/login"><i class="fas fa-sign-in-alt"></i> Вход в систему</a></li>
+            <li><a href="/auth/register"><i class="fas fa-user-plus"></i> Создать аккаунт</a></li>
+        </ul>
+    </aside>
+
+    <!-- Основной контент -->
+    <main class="content">
+        <h2>Добро пожаловать в MathApp!</h2>
+        <p>Это современное веб-приложение, разработанное на Spring Boot, предоставляет следующие возможности:</p>
+
+        <ul style="margin: 1rem 0 1.5rem 2rem;">
+            <li>Безопасная регистрация и аутентификация пользователей</li>
+            <li>Мощный калькулятор для математических вычислений</li>
+            <li>Удобный и интуитивно понятный интерфейс</li>
+            <li>Адаптивный дизайн для всех устройств</li>
+        </ul>
+
+        <div class="features">
+            <div class="feature-card">
+                <i class="fas fa-shield-alt"></i>
+                <h3>Безопасность</h3>
+                <p>Все пароли хранятся в зашифрованном виде</p>
+            </div>
+
+            <div class="feature-card">
+                <i class="fas fa-bolt"></i>
+                <h3>Производительность</h3>
+                <p>Быстрые вычисления благодаря Spring Boot</p>
+            </div>
+        </div>
+    </main>
+</div>
+
+<!-- Подвал сайта -->
+<footer>
+    <p>&copy; 2025 MathApp. Все права защищены.</p>
+    <div class="social-links">
+        <a href="#"><i class="fab fa-github"></i></a>
+        <a href="#"><i class="fab fa-twitter"></i></a>
+        <a href="#"><i class="fab fa-linkedin"></i></a>
+    </div>
+</footer>
+
+</body>
+</html>

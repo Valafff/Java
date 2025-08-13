@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<!-- Подключаем пространство имен Thymeleaf для использования его атрибутов -->
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Вход</title>
+</head>
+<body>
+    <h2>Вход</h2>
+    <!-- Форма для входа пользователя -->
+    <!-- action="/login" указывает, что данные формы будут отправлены на эндпоинт /login -->
+    <!-- method="post" указывает, что будет использоваться HTTP-метод POST -->
+    <form action="/auth/login" method="post">
+        <div>
+            <!-- Метка для поля ввода имени пользователя -->
+            <label for="username">Имя пользователя:</label>
+            <!-- Поле для ввода имени пользователя. `required` делает поле обязательным для заполнения -->
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div>
+            <!-- Метка для поля ввода пароля -->
+            <label for="password">Пароль:</label>
+            <!-- Поле для ввода пароля. `type="password"` скрывает вводимые символы -->
+            <input type="password" id="password" name="password" required>
+        </div>
+        <!-- Кнопка для отправки формы -->
+        <button type="submit">Войти</button>
+    </form>
+    <!--
+        Сообщение об ошибке, которое отображается, если в URL есть параметр "error".
+        Thymeleaf `th:if` проверяет это условие.
+    -->
+    <p th:if="${param.error}" style="color: red;">Неверное имя пользователя или пароль</p>
+</body>
+</html>

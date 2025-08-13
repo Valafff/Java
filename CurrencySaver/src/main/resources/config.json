@@ -1,0 +1,10 @@
+{
+  "autostart": false,
+  "poll_interval": 1200,
+  "service_urls": [
+    "https://api.coingecko.com/api/v3/coins/markets?vs_currency\u003dusd\u0026order\u003dmarket_cap_desc\u0026per_page\u003d250\u0026page\u003d1\u0026sparkline\u003dfalse"
+  ],
+  "api_keys": [
+    "$apiKey"
+  ]
+}

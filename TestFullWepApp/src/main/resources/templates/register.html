@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Регистрация</title>
+</head>
+<body>
+    <h2>Регистрация</h2>
+    <!-- Форма для регистрации нового пользователя -->
+    <!-- action="/register" указывает, что данные формы будут отправлены на эндпоинт /register -->
+    <!-- method="post" указывает, что будет использоваться HTTP-метод POST -->
+    <form action="/auth/register" method="post">
+        <div>
+            <!-- Метка для поля ввода имени пользователя -->
+            <label for="username">Имя пользователя:</label>
+            <!-- Поле для ввода имени пользователя. `required` делает поле обязательным для заполнения -->
+            <input type="text" id="username" name="username" required>
+        </div>
+        <div>
+            <!-- Метка для поля ввода пароля -->
+            <label for="password">Пароль:</label>
+            <!-- Поле для ввода пароля. `type="password"` скрывает вводимые символы -->
+            <input type="password" id="password" name="password" required>
+        </div>
+        <!-- Кнопка для отправки формы -->
+        <button type="submit">Зарегистрироваться</button>
+    </form>
+</body>
+</html>
