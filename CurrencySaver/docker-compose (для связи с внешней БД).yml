@@ -1,7 +1,7 @@
 version: '3.8'
 services:
   app:
-    container_name: currency_harvester
+    container_name: simple-calculator
     image: test-java-spring-boot-app
     build: .
     ports:
@@ -11,13 +11,5 @@ services:
       - SPRING_DATASOURCE_URL=jdbc:postgresql://host.docker.internal:5433/testDB
       - SPRING_DATASOURCE_USERNAME=vi
       - SPRING_DATASOURCE_PASSWORD=12345
-
-  db:
-    container_name: currency_db
-    image: postgres
-    environment:
-      - POSTGRES_USER=vi
-      - POSTGRES_PASSWORD=12345
-      - POSTGRES_DB=testDB
-    ports:
-      - "5433:5432"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
