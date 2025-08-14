@@ -6,7 +6,7 @@ public class Config {
     private boolean autostart;
     private int poll_interval;
     private List<String> service_urls;
-    private List<String> api_keys;
+//    private List<String> api_keys;
 
     // Getters and setters
     public boolean isAutostart() {
@@ -33,11 +33,11 @@ public class Config {
         this.service_urls = service_urls;
     }
 
-    public List<String> getApi_keys() {
-        return api_keys;
-    }
+//    public List<String> getApi_keys() {
+//        return api_keys;
+//    }
 
-    public void setApi_keys(List<String> api_keys) {
-        this.api_keys = api_keys;
-    }
+//    public void setApi_keys(List<String> api_keys) {
+//        this.api_keys = api_keys;
+//    }
 }

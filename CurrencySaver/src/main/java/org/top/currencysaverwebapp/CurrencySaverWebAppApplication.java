@@ -13,12 +13,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 @EnableScheduling
 @OpenAPIDefinition(
 		info = @Info(
-				title = "Currency Saver",
+				title = "Currency Harvester",
 				version = "1.0.0",
 				description = "Сервис для работы с курсами валют",
 				contact = @Contact(
-						name = "Виталий",
-						email = "vitalijjvasilchenko@gmail.com"
+						name = "Виталий"
 				)
 		)
 )

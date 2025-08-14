@@ -15,8 +15,8 @@ import java.io.Writer;
 @Service
 public class ConfigService {
 
-    private static final String CONFIG_FILE = "./src/main/resources/config.json";
-//    private static final String CONFIG_FILE = "./resources/config.json"; // Для контейнера
+//    private static final String CONFIG_FILE = "./src/main/resources/config.json";
+    private static final String CONFIG_FILE = "./resources/config.json"; // Для контейнера
     private final Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
     public Config loadConfig() throws IOException {

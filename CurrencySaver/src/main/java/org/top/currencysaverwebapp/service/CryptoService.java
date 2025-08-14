@@ -3,6 +3,7 @@ package org.top.currencysaverwebapp.service;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import com.google.gson.Gson;
 import jakarta.annotation.PostConstruct;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.TaskScheduler;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
@@ -13,15 +14,16 @@ import org.top.currencysaverwebapp.repository.CryptocurrencyRepository;
 
 import java.io.IOException;
 import java.time.Duration;
-import java.util.Comparator;
 import java.util.List;
-import java.util.Objects;
 import java.util.Optional;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ScheduledFuture;
+import java.util.function.Function;
 import java.util.stream.Collectors;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+
+
 
 @Service
 public class CryptoService {
@@ -31,16 +33,19 @@ public class CryptoService {
     private final RestTemplate restTemplate;
     private final Gson gson;
     private final TaskScheduler taskScheduler;
+    private final String apiKey;
 
     private ScheduledFuture<?> scheduledTask;
     private boolean isServiceRunning = false;
 
-    public CryptoService(CryptocurrencyRepository cryptocurrencyRepository, ConfigService configService, TaskScheduler taskScheduler) {
+    public CryptoService(CryptocurrencyRepository cryptocurrencyRepository, ConfigService configService, TaskScheduler taskScheduler, @Value("${API_KEY}") String apiKey) {
         this.cryptocurrencyRepository = cryptocurrencyRepository;
         this.configService = configService;
         this.taskScheduler = taskScheduler;
         this.restTemplate = new RestTemplate();
         this.gson = new Gson();
+        this.apiKey = apiKey;
+        System.out.println("Значение переменной apiKey : " + apiKey);
     }
 
     @PostConstruct
@@ -54,7 +59,7 @@ public class CryptoService {
 
     public List<Cryptocurrency> getTop200() throws IOException {
         Config config = configService.loadConfig();
-        String url = config.getService_urls().get(0) + "&key=" + config.getApi_keys().get(0);
+        String url = config.getService_urls().get(0) + "&key=" + apiKey;
         String response = restTemplate.getForObject(url, String.class);
 
         ObjectMapper mapper = new ObjectMapper();
@@ -76,15 +81,6 @@ public class CryptoService {
         cryptocurrencyRepository.saveAll(cryptocurrencies);
         return cryptocurrencies;
     }
-
-//    public void start() throws IOException {
-//        if (isServiceRunning) {
-//            return;
-//        }
-//        Config config = configService.loadConfig();
-//        scheduledTask = taskScheduler.scheduleAtFixedRate(this::getTop200AndSave, Duration.ofSeconds(config.getPoll_interval()));
-//        isServiceRunning = true;
-//    }
 
     public void start() throws IOException {
         if (isServiceRunning) {
@@ -131,27 +127,42 @@ public class CryptoService {
     }
 
     public List<CryptocurrencyDto> getTop100FromDb() {
-        return cryptocurrencyRepository.findTop100ByOrderByMarketCapRankAsc().stream()
-                .map(c -> new CryptocurrencyDto(c.getName(), c.getCurrentPrice(), c.getLastUpdated()))
-                .collect(Collectors.toList());
+
+//        return cryptocurrencyRepository.findTop100ByOrderByMarketCapRankAsc().stream()
+//                .map(c -> new CryptocurrencyDto(c.getName(), c.getCurrentPrice(), c.getLastUpdated()))
+//                .collect(Collectors.toList()).stream().distinct().toList();
+
+//        return cryptocurrencyRepository.findAll().stream()
+//                .collect(Collectors.toMap(
+//                        Cryptocurrency::getName,
+//                        Function.identity(),
+//                        (existing, replacement) ->
+//                                existing.getLastUpdated().isAfter(replacement.getLastUpdated())
+//                                        ? existing
+//                                        : replacement
+//                ))
+//                .values()
+//                .stream()
+//                .map(c -> new CryptocurrencyDto(
+//                        c.getName(),
+//                        c.getCurrentPrice(),
+//                        c.getLastUpdated()
+//                ))
+//                .toList();
+
+        return cryptocurrencyRepository.findLatestDistinctCurrencies().stream()
+                .map(c -> new CryptocurrencyDto(
+                        c.getName(),
+                        c.getCurrentPrice(),
+                        c.getLastUpdated()
+                ))
+                .toList();
     }
 
     public Optional<CryptocurrencyDto> getByName(String name) {
-//        return cryptocurrencyRepository.findByName(name)
-//                .map(c -> new CryptocurrencyDto(c.getName(), c.getCurrentPrice(), c.getLastUpdated()));
-//        var tmp = cryptocurrencyRepository.findTop100ByOrderByMarketCapRankAsc().stream()
-//                .map(c -> new CryptocurrencyDto(c.getName(), c.getCurrentPrice(), c.getLastUpdated())).sorted()
-//                .collect(Collectors.toList());
 
         var tmp = cryptocurrencyRepository.findFirstByNameOrderByLastUpdatedStringDesc(name);
         return  tmp.map(c -> new CryptocurrencyDto(c.getName(), c.getCurrentPrice(), c.getLastUpdated()));
-//
-//
-//
-//
-//        return tmp.stream()
-//                .filter(c -> Objects.equals(c.getName(), name))
-//                .sorted(Comparator.comparing(CryptocurrencyDto::getLastUpdated).reversed())
-//                .findFirst();
+
     }
 }

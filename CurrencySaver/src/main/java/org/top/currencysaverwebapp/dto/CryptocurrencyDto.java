@@ -21,6 +21,10 @@ public class CryptocurrencyDto implements Comparable<CryptocurrencyDto>
         this.lastUpdated = lastUpdated;
     }
 
+    public CryptocurrencyDto(String name) {
+        this.name = name;
+    }
+
     // Getters and setters
     public String getName() {
         return name;
