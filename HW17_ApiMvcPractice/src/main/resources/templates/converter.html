@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8">
+  <title>Calculate</title>
+</head>
+<body>
+<h1>Калькулятор систем счисления</h1>
+
+<form method="post" th:action="@{/converter}">
+
+  <label for="from">Из:</label>
+  <select id="from" name="from">
+    <option th:each="system : ${numberSystems}"
+            th:value="${system}"
+            th:selected="${from == system}">
+      [[${system}]]
+    </option>
+  </select>
+
+  <label for="to">В:</label>
+  <select id="to" name="to">
+    <option th:each="system : ${numberSystems}"
+            th:value="${system}"
+            th:selected="${to == system}">
+      [[${system}]]
+    </option>
+  </select>
+
+  <label for="value">Число:</label>
+  <input type="text" id="value" name="value" required th:value="${value}" />
+
+  <button>Пересчитать</button>
+</form>
+
+<p>Результат: [[${result}]]</p>
+
+
+<p><a th:href="@{/}">На главную страницу</a></p>
+</body>
+</html>

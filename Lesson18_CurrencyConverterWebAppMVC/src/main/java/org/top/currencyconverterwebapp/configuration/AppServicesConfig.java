@@ -7,7 +7,7 @@ import org.top.currencyconverterwebapp.converter.RatesProvider;
 import org.top.currencyconverterwebapp.simple.SimpleCurrencyConverter;
 import org.top.currencyconverterwebapp.simple.SimpleRatesProvider;
 
-@Configuration
+@Configuration //Указывает на то, что класс AppServicesConfig содержит  конфигурацию Spring
 public class AppServicesConfig {
 
     @Bean
