@@ -2,6 +2,8 @@ package com.apimvcexample.HW17_ApiMvcPractice.api;
 
 import com.apimvcexample.HW17_ApiMvcPractice.interfaces.iConverter;
 import com.apimvcexample.HW17_ApiMvcPractice.api.ApiMessages.*;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -29,6 +31,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("api")
+@Tag(name = "Convertor Controller", description = "Контроллер для работы с системами счисления")
 public class ConverterController
 {
     private final iConverter converter;
@@ -41,6 +44,7 @@ public class ConverterController
     public List<String> numberSystems () {return converter.numberSystems();};
 
     @PostMapping("convert")
+    @Operation(summary = "Операция конвертации одной системы счисления в другую")
     public ResponseEntity<?> convert(@RequestBody ApiMessages.DataToConvertMessage data)
     {
 
