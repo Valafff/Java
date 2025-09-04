@@ -150,6 +150,8 @@ public class CryptoService {
 //                ))
 //                .toList();
 
+
+
         return cryptocurrencyRepository.findLatestDistinctCurrencies().stream()
                 .map(c -> new CryptocurrencyDto(
                         c.getName(),

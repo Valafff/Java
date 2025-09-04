@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>AirportDirectoryApp</title>
+    <!-- подключение стилей bootstrap -->
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+</head>
+<body>
+    <div class="container-fluid text-center">
+        <h1>Добавить новую запись</h1>
+
+        <!-- форма добавления новой записи об аэропорте -->
+        <form th:method="post" th:action="@{/airport/new}" th:object="${airport}">
+            <!-- код -->
+            <div class="mb-3 row">
+                <label class="col-sm-2 col-form-label" for="code">Код: </label>
+                <div class="col-sm-10">
+                    <input class="form-control" type="text" id="code" pattern="[A-Z]{3}" required th:field="*{code}" />
+                </div>
+            </div>
+
+            <!-- наименование -->
+            <div class="mb-3 row">
+                <label class="col-sm-2 col-form-label" for="name">Наименование: </label>
+                <div class="col-sm-10">
+                    <input class="form-control" type="text" id="name" required minlength="1" th:field="*{name}" />
+                </div>
+            </div>
+
+            <!-- кол-во ВПП -->
+            <div class="mb-3 row">
+                <label class="col-sm-2 col-form-label" for="runway-count">Кол-во ВПП: </label>
+                <div class="col-sm-10">
+                    <input class="form-control" type="number" id="runway-count" required min="0" th:field="*{runwayCount}" />
+                </div>
+            </div>
+
+            <!-- кнопка отправки формы -->
+            <div class="mb-3 row">
+                <div class="col-sm-12">
+                    <button class="btn btn-success form-control">Добавить</button>
+                </div>
+            </div>
+        </form>
+
+        <p><a th:href="@{/airport}">К списку аэропортов</a></p>
+        <p><a th:href="@{/}">На Index</a></p>
+    </div>
+
+    <!-- подключение скриптов bootstrap -->
+    <script th:src="@{/webjars/bootstrap/js/bootstrap.bundle.min.js}"></script>
+</body>
+</html>

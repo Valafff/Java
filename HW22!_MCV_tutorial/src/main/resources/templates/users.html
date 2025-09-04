@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Управление пользователями</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+</head>
+<body>
+<div class="container-fluid text-center">
+    <div><h1>Управление пользователями</h1></div>
+    <div class="m-2">
+<!--        <a class="h3" th:href="@{/users/new}">Add New User</a>-->
+        <a class="h3 link-primary text-decoration-none" th:href="@{/users/new}">Добавить нового пользователя</a>
+    </div>
+    <div th:if="${message}" class="alert alert-success text-center">
+        [[${message}]]
+    </div>
+    <div th:if="${messageAlert}" class="alert alert-danger text-center">
+        [[${messageAlert}]]
+    </div>
+    <table class="table table-bordered">
+         <thead>
+            <tr class="table-dark">
+                <th>ID</th>
+                <th>E-mail</th>
+                <th>Имя</th>
+                <th>Фамилия</th>
+                <th>Вкл/Выкл</th>
+                <th></th>
+            </tr>
+         </thead>
+        <tbody>
+        <th:block th:each="user : ${listUsers}">
+            <tr>
+                <td>[[${user.id}]]</td>
+                <td>[[${user.email}]]</td>
+                <td>[[${user.firstName}]]</td>
+                <td>[[${user.lastName}]]</td>
+                <td>[[${user.enabled}]]</td>
+                <td>
+<!--                    <a class ="h4 mr-3" th:href="@{'/users/edit/' + ${user.id}}">Edit</a>-->
+<!--                    <a class="h4" th:href="@{'/users/delete/' + ${user.id}}">Delete</a>-->
+                    <a class="btn btn-link text-decoration-none p-0 mr-3" th:href="@{'/users/edit/' + ${user.id}}">Редактировать</a>
+                    <a class="btn btn-link text-decoration-none p-0" th:href="@{'/users/delete/' + ${user.id}}">Удалить</a>
+                </td>
+            </tr>
+        </th:block>
+        </tbody>
+    </table>
+
+
+<!--    <a class="h2" href="@{/}">Manage Users</a>-->
+</div>
+</body>
+</html>
