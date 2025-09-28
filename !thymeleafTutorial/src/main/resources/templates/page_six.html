@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple text</title>
+</head>
+<!--Radiobuttons и атрибуты-->
+<body>
+    <h1>Переключатель картинок</h1>
+
+    <form th:action="@{/thymeleaf/attributes}" method="post">
+        <input type="radio" name="check" value="1"/>
+        <input type="radio" name="check" value="2"/>
+        <input type="radio" name="check" value="3"/>
+        <br>
+        <button type="submit">Выбрать фото</button>
+    </form>
+    <img th:if="${isGiven}" th:attr="src=${imageId}">
+</body>
+</html>

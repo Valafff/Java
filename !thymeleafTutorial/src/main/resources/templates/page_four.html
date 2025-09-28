@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple text</title>
+</head>
+
+<body>
+    <form th:action="@{/thymeleaf/check-pass}" method="post">
+        <label>Введите пароль</label>
+        <input type="password" name="password"/>
+        <button type="submit">Проверка</button>
+    </form>
+
+    <div th:if="${isGiven}">
+        <p th:if="${isCorrect}">Пароль верный!</p>
+        <p th:unless="${isCorrect}">Пароль неверный!</p>
+    </div>
+</body>
+</html>

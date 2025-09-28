@@ -1,0 +1,31 @@
+<!DOCTYPE html> <!-- Объявление типа документа HTML5 -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org"> <!-- Корневой элемент с пространством имен Thymeleaf -->
+<head> <!-- Секция заголовка документа -->
+    <meta charset="UTF-8"> <!-- Кодировка UTF-8 для поддержки всех символов -->
+    <title>Register</title> <!-- Заголовок страницы (отображается во вкладке браузера) -->
+    <link rel="stylesheet" th:href="@{/css/styles.css}"> <!-- Подключение внешней CSS таблицы стилей -->
+</head>
+<body> <!-- Тело документа (видимое содержимое страницы) -->
+<div class="container"> <!-- Контейнер для центрирования и стилизации содержимого -->
+    <h1>Register</h1> <!-- Заголовок первого уровня -->
+    <form action="/register" method="post"> <!-- Форма регистрации с POST методом -->
+        <!-- Добавлен CSRF токен -->
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/> <!-- Скрытое поле CSRF токена для защиты от подделки -->
+
+        <div> <!-- Группа поля ввода -->
+            <label for="username">Username:</label> <!-- Метка для поля username -->
+            <input type="text" id="username" name="username" required> <!-- Поле ввода username с обязательным заполнением -->
+        </div>
+        <div> <!-- Группа поля ввода -->
+            <label for="password">Password:</label> <!-- Метка для поля password -->
+            <input type="password" id="password" name="password" required> <!-- Поле ввода password (скрытый ввод) с обязательным заполнением -->
+        </div>
+        <button type="submit" class="btn">Register</button> <!-- Кнопка отправки формы -->
+    </form>
+    <p th:if="${error}" class="error" th:text="${error}"></p> <!-- Условное отображение сообщения об ошибке -->
+
+    <!-- Добавлена ссылка на логин для удобства -->
+    <p>Already have an account? <a href="/login">Login here</a></p> <!-- Ссылка на страницу входа -->
+</div>
+</body>
+</html>

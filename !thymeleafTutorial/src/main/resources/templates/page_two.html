@@ -1,0 +1,11 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Simple text</title>
+</head>
+<!--Пример передачи  параметра http://localhost:8080/thymeleaf/say-hello?name=Vetal&secondName=Afanasiev-->
+<body>
+    <h1 th:text="'Привет, ' + ${name} +' '+ ${secondName}+'!'"></h1>
+</body>
+</html>

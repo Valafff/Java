@@ -1,0 +1,39 @@
+<!DOCTYPE html> <!-- Объявление типа документа HTML5 -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org"> <!-- Корневой элемент с пространством имен Thymeleaf -->
+<head> <!-- Секция заголовка документа -->
+    <meta charset="UTF-8"> <!-- Кодировка UTF-8 -->
+    <title>Login</title> <!-- Заголовок страницы -->
+    <link rel="stylesheet" th:href="@{/css/styles.css}"> <!-- Подключение CSS стилей -->
+</head>
+<body> <!-- Тело документа -->
+<div class="container"> <!-- Контейнер для содержимого -->
+    <h1>Login</h1> <!-- Заголовок страницы -->
+    <form action="/login" method="post"> <!-- Форма входа с POST методом -->
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/> <!-- CSRF токен для защиты от подделки -->
+        <div> <!-- Группа поля ввода -->
+            <label for="username">Username:</label> <!-- Метка для поля username -->
+            <input type="text" id="username" name="username" required> <!-- Поле ввода username с обязательным заполнением -->
+        </div>
+        <div> <!-- Группа поля ввода -->
+            <label for="password">Password:</label> <!-- Метка для поля password -->
+            <input type="password" id="password" name="password" required> <!-- Поле ввода password (скрытый ввод) с обязательным заполнением -->
+        </div>
+        <button type="submit" class="btn">Login</button> <!-- Кнопка отправки формы -->
+
+
+        <!--Вывод сообщения о блоке-->
+        <div th:if="${session.SPRING_SECURITY_LAST_EXCEPTION != null}"> <!-- Условное отображение если в сессии есть исключение безопасности -->
+            <p class="error" th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}"> <!-- Вывод сообщения об ошибке -->
+                Error message <!-- Текст по умолчанию (заменяется Thymeleaf) -->
+            </p>
+        </div>
+
+
+
+    </form>
+    <p th:if="${param.error}" class="error">Invalid username or password.</p> <!-- Сообщение об ошибке при наличии параметра error в URL -->
+    <p th:if="${session != null and session.SPRING_SECURITY_LAST_EXCEPTION != null}" class="error" th:text="${session.SPRING_SECURITY_LAST_EXCEPTION.message}"></p> <!-- Альтернативное отображение ошибки из сессии -->
+    <p th:if="${param.logout}" class="success">You have been logged out.</p> <!-- Сообщение об успешном выходе при наличии параметра logout -->
+</div>
+</body>
+</html>

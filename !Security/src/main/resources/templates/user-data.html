@@ -1,0 +1,45 @@
+<!DOCTYPE html> <!-- Объявление типа документа HTML5 -->
+<html lang="en" xmlns:th="http://www.thymeleaf.org"> <!-- Корневой элемент с пространством имен Thymeleaf -->
+<head> <!-- Секция заголовка документа -->
+    <meta charset="UTF-8"> <!-- Кодировка UTF-8 -->
+    <title>User Data</title> <!-- Заголовок страницы -->
+    <link rel="stylesheet" th:href="@{/css/styles.css}"> <!-- Подключение CSS стилей -->
+</head>
+<body> <!-- Тело документа -->
+<div class="container"> <!-- Контейнер для содержимого -->
+    <h1>User Data</h1> <!-- Заголовок страницы -->
+    <p>Username: <span th:text="${user.username}"></span></p> <!-- Отображение имени пользователя -->
+
+    <h2>Sign-In Attempts</h2> <!-- Подзаголовок для истории входов -->
+    <table> <!-- Таблица для отображения попыток входа -->
+        <thead> <!-- Заголовок таблицы -->
+        <tr> <!-- Строка заголовка -->
+            <th>Attempt Time</th> <!-- Столбец: Время попытки -->
+            <th>Successful</th> <!-- Столбец: Успешность -->
+        </tr>
+        </thead>
+        <tbody> <!-- Тело таблицы -->
+        <tr th:each="attempt : ${signInAttempts.content}"> <!-- Цикл по элементам страницы -->
+            <td th:text="${attempt.attemptTime}"></td> <!-- Ячейка: время попытки -->
+            <td th:text="${attempt.successful}"></td> <!-- Ячейка: флаг успешности -->
+        </tr>
+        </tbody>
+    </table>
+
+    <div class="pagination"> <!-- Контейнер пагинации -->
+        <a th:if="${signInAttempts.hasPrevious()}" th:href="@{/user-data(page=${signInAttempts.number - 1})}">Previous</a> <!-- Ссылка "Назад" если есть предыдущая страница -->
+        <span th:text="${signInAttempts.number + 1}"></span> of <span th:text="${signInAttempts.totalPages}"></span> <!-- Информация о текущей странице и общем количестве -->
+        <a th:if="${signInAttempts.hasNext()}" th:href="@{/user-data(page=${signInAttempts.number + 1})}">Next</a> <!-- Ссылка "Вперед" если есть следующая страница -->
+    </div>
+
+    <form action="/logout" method="post"> <!-- Форма для выхода из системы -->
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/> <!-- CSRF токен -->
+        <button type="submit" class="btn">Logout</button> <!-- Кнопка выхода -->
+    </form>
+    <form action="/delete-account" method="post"> <!-- Форма для удаления аккаунта -->
+        <input type="hidden" th:name="${_csrf.parameterName}" th:value="${_csrf.token}"/> <!-- CSRF токен -->
+        <button type="submit" class="btn btn-danger">Delete Account</button> <!-- Кнопка удаления аккаунта -->
+    </form>
+</div>
+</body>
+</html>
