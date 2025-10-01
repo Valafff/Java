@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Shop</title>
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" th:href="@{/css/shop.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="~{layout :: header}"></div>
+
+<main>
+    <section>
+        <h2 th:if="${selectedCategoryId == null}">Все товары</h2>
+        <div th:each="category : ${categories}"
+             th:if="${selectedCategoryId != null and category.id == selectedCategoryId}">
+            <h2 th:text="${category.description}">Название категории</h2>
+        </div>
+    </section>
+
+    <section>
+        <article th:each="good : ${goods}">
+            <h2 th:text="${good.title}"></h2>
+            <img th:src="@{/images/placeholder.jpeg}" th:alt="${good.title}">
+            <p th:text="${good.description}"></p>
+            <p>Цена: <span th:text="${good.price}"></span> руб.</p>
+            <form action="/cart" method="post">
+                <input type="hidden" name="id" th:value="${good.id}" />
+                <button class="btn-buy" type="submit" name="action" value="add">Купить</button>
+            </form>
+        </article>
+    </section>
+</main>
+
+<div th:replace="~{layout :: footer}"></div>
+</body>
+</html>

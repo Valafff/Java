@@ -1,0 +1,67 @@
+main {
+    padding: 20px;
+    flex: 1;
+}
+
+aside {
+    background-color: #d0d0d0;
+    padding: 10px;
+    margin-bottom: 20px;
+}
+
+section {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+article {
+    background-color: #fff;
+    border: 1px solid #ccc;
+    margin: 10px;
+    padding: 10px;
+    width: calc(33.333% - 22px);
+    box-sizing: border-box;
+}
+
+.pagination {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.pagination button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    margin: 0 5px;
+    cursor: pointer;
+}
+
+.total {
+    text-align: right;
+    margin-top: 20px;
+}
+
+.total button {
+    background-color: #28a745;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    cursor: pointer;
+}
+
+.total input {
+    padding: 10px 20px;
+}
+
+.price-sort {
+    margin-top: 10px;
+}
+
+.price-sort input[type="radio"] {
+    margin-right: 5px;
+}
+
+.price-sort label {
+    margin-right: 10px;
+}

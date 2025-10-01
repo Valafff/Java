@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Cart</title>
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" th:href="@{/css/shop.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="~{layout :: header}"></div>
+
+<main>
+    <h2 th:if="${cart.isEmpty()}">Корзина пуста</h2>
+    <section th:unless="${cart.isEmpty()}">
+        <article th:each="item : ${cart.values()}">
+            <h2 th:text="${item.productName}"></h2>
+            <p>Цена: <span th:text="${item.price}"></span> руб.</p>
+            <p>Количество: <span th:text="${item.quantity}"></span></p>
+            <form th:action="@{/cart/remove}" method="post">
+                <input type="hidden" name="id" th:value="${item.productId}" />
+                <button type="submit">Удалить</button>
+            </form>
+        </article>
+    </section>
+    <div class="total" th:unless="${cart.isEmpty()}">
+        <p>Общая сумма: <span th:text="${total}"></span> руб.</p>
+        <form th:action="@{/order}" method="post">
+            <input type="text" id="contacts" name="contacts" minlength="1" placeholder="Как связаться" required />
+            <button type="submit">Отправить заказ</button>
+        </form>
+    </div>
+</main>
+
+<div th:replace="~{layout :: footer}"></div>
+</body>
+</html>

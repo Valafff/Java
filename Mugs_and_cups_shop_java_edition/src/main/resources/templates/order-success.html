@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Order Success</title>
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" th:href="@{/css/shop.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<div th:replace="~{layout :: header}"></div>
+
+<main>
+    <h2>Заказ успешно оформлен!</h2>
+    <p>Наш менеджер скоро с вами свяжется.</p>
+    <a th:href="@{/shop}">Вернуться в магазин</a>
+</main>
+
+<div th:replace="~{layout :: footer}"></div>
+</body>
+</html>

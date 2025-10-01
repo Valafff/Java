@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">Mugs-and-Cups Shop</title>
+    <link rel="stylesheet" th:href="@{/css/footer.css}">
+    <link rel="stylesheet" th:href="@{/css/header.css}">
+    <link rel="stylesheet" th:href="@{/css/main.css}">
+    <link rel="stylesheet" th:href="@{/css/shop.css}">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<!-- шапка -->
+<header th:fragment="header">
+    <a class="index-link" th:href="@{/shop}"><h1>Интернет-магазин</h1></a>
+    <nav>
+        <ul>
+            <li><a th:href="@{/shop}">Все товары</a></li>
+            <li th:each="category : ${categories}">
+                <a th:href="@{/shop(category_id=${category.id})}" th:text="${category.description}"></a>
+            </li>
+        </ul>
+    </nav>
+    <div class="header-right">
+        <a href="/cart">Корзина</a>
+    </div>
+</header>
+
+<!-- контент страницы -->
+<div th:fragment="content"></div>
+
+<!-- подвал -->
+<footer th:fragment="footer">
+    <p>Контакты: example@example.com</p>
+    <p>Автор: Vetal</p>
+</footer>
+</body>
+</html>
